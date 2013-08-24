@@ -118,7 +118,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'rest_hooks',
-    'resthookdemo.crm'
+    'resthookdemo.crm',
+    'tastypie'
 )
 
 HOOK_EVENTS = {}

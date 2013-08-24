@@ -11,10 +11,7 @@ def contacts(request):
     return HttpResponse(map(unicode, contacts))
 
 @login_required
-def deals(request, contact_id=None):
+def deals(request):
     user = request.user
-    if not contact_id:
-        deals = Deal.objects.filter(contact__owner=user)
-    else:
-        deals = Deal.objects.filter(contact_id=contact_id)
+    deals = Deal.objects.filter(owner=user)
     return HttpResponse(map(unicode, deals))

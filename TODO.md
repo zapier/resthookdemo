@@ -1,5 +1,5 @@
-* Simple model definitions
 * Bootstrap or alternatives
-* Simple forms & views
 * Tastypie API
+* Simple forms
 * Plug in REST Hooks
+* Optional: Nuke username from tastypie

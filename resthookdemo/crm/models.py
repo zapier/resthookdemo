@@ -1,4 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
+from tastypie.models import create_api_key
+
+models.signals.post_save.connect(create_api_key, sender=User)
 
 
 class Contact(models.Model):
@@ -23,8 +27,7 @@ class Deal(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    contact = models.ForeignKey('crm.Contact')
-
+    owner = models.ForeignKey('auth.User')
     title = models.CharField(max_length=255)
     description = models.TextField()
     value = models.DecimalField(max_digits=7, decimal_places=2)
