@@ -5,11 +5,12 @@ from django.contrib import admin
 admin.autodiscover()
 
 from tastypie.api import Api
-from resthookdemo.crm.api import ContactResource, DealResource
+from resthookdemo.crm.api import ContactResource, DealResource, HookResource
 
 v1_api = Api(api_name='v1')
 v1_api.register(ContactResource())
 v1_api.register(DealResource())
+v1_api.register(HookResource())
 
 urlpatterns = patterns('',
     # Examples:
@@ -22,5 +23,4 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^crm/', include('resthookdemo.crm.urls')),
     url(r'^api/', include(v1_api.urls)),
-
 )

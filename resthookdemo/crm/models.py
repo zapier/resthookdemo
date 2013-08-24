@@ -13,6 +13,7 @@ class Contact(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     owner = models.ForeignKey('auth.User')
+    user = property(lambda s: s.owner)
     full_name = models.CharField(max_length=255)
     email = models.EmailField()
 
@@ -28,6 +29,7 @@ class Deal(models.Model):
     updated = models.DateTimeField(auto_now=True)
 
     owner = models.ForeignKey('auth.User')
+    user = property(lambda s: s.owner)
     title = models.CharField(max_length=255)
     description = models.TextField()
     value = models.DecimalField(max_digits=7, decimal_places=2)

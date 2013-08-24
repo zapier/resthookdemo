@@ -122,7 +122,14 @@ INSTALLED_APPS = (
     'tastypie'
 )
 
-HOOK_EVENTS = {}
+HOOK_EVENTS = {
+    'contact.created': 'crm.Contact.created',
+    'contact.updated': 'crm.Contact.updated',
+    'contact.deleted': 'crm.Contact.deleted',
+    'deal.created': 'crm.Deal.created',
+    'deal.updated': 'crm.Deal.updated',
+    'deal.deleted': 'crm.Deal.deleted',
+}
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

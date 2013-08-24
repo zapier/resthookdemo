@@ -1,7 +1,10 @@
 from tastypie.resources import ModelResource
-from resthookdemo.crm.models import Contact, Deal
 from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import Authorization
+
+from rest_hooks.models import Hook
+from resthookdemo.crm.models import Contact, Deal
+
 
 class ContactResource(ModelResource):
 
@@ -33,3 +36,20 @@ class DealResource(ModelResource):
         authorization = Authorization()
         queryset = Deal.objects.all()
         resource_name = 'deals'
+
+class HookResource(ModelResource):
+    def obj_create(self, bundle, request=None, **kwargs):
+        return super(HookResource, self).obj_create(bundle,
+                                                    request,
+                                                    user=request.user)
+
+    def apply_authorization_limits(self, request, object_list):
+        return object_list.filter(user=request.user)
+
+    class Meta:
+        resource_name = 'hooks'
+        queryset = Hook.objects.all()
+        authentication = ApiKeyAuthentication()
+        authorization = Authorization()
+        allowed_methods = ['get', 'post', 'delete']
+        fields = ['event', 'target']
