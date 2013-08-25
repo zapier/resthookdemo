@@ -3,7 +3,7 @@
 {% block content %}
   <div class="row">
     <div class="col-md-7">
-      <h2>Your Contacts <a href="{% url "create_contact" %}" class="btn btn-default btn-sm">Create</a></h2>
+      <h2>Your Contacts <a href="{% url "create_contact" %}" class="btn btn-default btn-sm"><i class="icon-plus"></i> Create</a></h2>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -19,7 +19,7 @@
               <td>{{ contact.id }}</td>
               <td>{{ contact.full_name }}</td>
               <td>{{ contact.email }}</td>
-              <td><a href="{% url "edit_contact" contact.id %}">edit</a> &amp; <a href="{% url "delete_contact" contact.id %}">delete</a></td>
+              <td><a class="btn btn-default btn-xs" href="{% url "edit_contact" contact.id %}"><i class="icon-pencil"></i></a> <a class="btn btn-default btn-xs" href="{% url "delete_contact" contact.id %}"><i class="icon-remove"></i></a></td>
             </tr>
           {% empty %}
             <tr>
