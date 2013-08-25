@@ -4,6 +4,7 @@ from django.core.serializers import json
 
 from tastypie.authentication import Authentication, SessionAuthentication, MultiAuthentication
 from tastypie.authorization import Authorization
+from tastypie.exceptions import Unauthorized
 from tastypie.resources import ModelResource
 from tastypie.serializers import Serializer
 
@@ -20,6 +21,32 @@ class PrettyJSONSerializer(Serializer):
         return simplejson.dumps(data, cls=json.DjangoJSONEncoder,
                 sort_keys=True, ensure_ascii=False, indent=self.json_indent)
 
+class UserObjectsOnlyAuthorization(Authorization):
+    def read_list(self, object_list, bundle):
+        return object_list.filter(user=bundle.request.user)
+
+    def read_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def create_list(self, object_list, bundle):
+        return object_list
+
+    def create_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def update_list(self, object_list, bundle):
+        return [obj for obj in object_list if obj.user == bundle.request.user]
+
+    def update_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+    def delete_list(self, object_list, bundle):
+        return [obj for obj in object_list if obj.user == bundle.request.user]
+
+    def delete_detail(self, object_list, bundle):
+        return bundle.obj.user == bundle.request.user
+
+
 class ApiKeyAuthentication(Authentication):
     def _unauthorized(self):
         from tastypie.http import HttpUnauthorized
@@ -29,7 +56,8 @@ class ApiKeyAuthentication(Authentication):
         from tastypie.compat import AUTH_USER_MODEL
         from tastypie.models import ApiKey
 
-        api_key_raw = request.GET.get('api_key')
+        api_key_raw = request.GET.get('api_key', None)
+        print api_key_raw
 
         try:
             api_key = ApiKey.objects.select_related(AUTH_USER_MODEL).get(key=api_key_raw)
@@ -52,7 +80,7 @@ class ContactResource(ModelResource):
 
     class Meta:
         authentication = MultiAuthentication(SessionAuthentication(), ApiKeyAuthentication())
-        authorization = Authorization()
+        authorization = UserObjectsOnlyAuthorization()
         serializer = PrettyJSONSerializer()
         queryset = Contact.objects.all()
         resource_name = 'contacts'
@@ -68,7 +96,7 @@ class DealResource(ModelResource):
 
     class Meta:
         authentication = MultiAuthentication(SessionAuthentication(), ApiKeyAuthentication())
-        authorization = Authorization()
+        authorization = UserObjectsOnlyAuthorization()
         serializer = PrettyJSONSerializer()
         queryset = Deal.objects.all()
         resource_name = 'deals'
@@ -87,6 +115,6 @@ class HookResource(ModelResource):
         queryset = Hook.objects.all()
         authentication = MultiAuthentication(SessionAuthentication(), ApiKeyAuthentication())
         serializer = PrettyJSONSerializer()
-        authorization = Authorization()
+        authorization = UserObjectsOnlyAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         fields = ['event', 'target']
