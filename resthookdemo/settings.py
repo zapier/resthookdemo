@@ -134,6 +134,8 @@ HOOK_EVENTS = {
     'deal.deleted': 'crm.Deal.deleted',
 }
 
+TASTYPIE_DEFAULT_FORMATS = ['json']
+
 LOGIN_URL = 'login'
 
 # A sample logging configuration. The only tangible logging
