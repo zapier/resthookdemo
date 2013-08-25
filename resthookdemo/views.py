@@ -63,3 +63,10 @@ def edit_hook(request, hook_id=None):
 
     return render(request, 'edit_hook.html', locals())
 
+@login_required
+def delete_hook(request, hook_id):
+    hooks = Hook.objects.filter(user=request.user)
+    hook = get_object_or_404(hooks, id=hook_id)
+    hook.delete()
+    return redirect('hooks_list')
+

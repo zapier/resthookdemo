@@ -29,6 +29,7 @@ urlpatterns = patterns('',
     url(r'^hooks$', 'resthookdemo.views.hooks', name='hooks_list'),
     url(r'^hooks/create$', 'resthookdemo.views.edit_hook', name='create_hook'),
     url(r'^hooks/(?P<hook_id>\d+)/edit$', 'resthookdemo.views.edit_hook', name='edit_hook'),
+    url(r'^hooks/(?P<hook_id>\d+)/delete$', 'resthookdemo.views.delete_hook', name='delete_hook'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^crm/', include('resthookdemo.crm.urls')),

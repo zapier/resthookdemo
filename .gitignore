@@ -1,3 +1,4 @@
 *.sqlite3
 *.pyc
 rest_hooks/
+*.DS_Store

@@ -30,6 +30,13 @@ def edit_contact(request, contact_id=None):
     return render(request, 'edit_contact.html', locals())
 
 @login_required
+def delete_contact(request, contact_id):
+    contacts = Contact.objects.filter(owner=request.user)
+    contact = get_object_or_404(contacts, id=contact_id)
+    contact.delete()
+    return redirect('contacts_list')
+
+@login_required
 def deals(request):
     deals = Deal.objects.filter(owner=request.user)
     return render(request, 'deals.html', locals())
@@ -52,3 +59,10 @@ def edit_deal(request, deal_id=None):
         form = DealForm(instance=deal)
 
     return render(request, 'edit_deal.html', locals())
+
+@login_required
+def delete_deal(request, deal_id):
+    deals = Deal.objects.filter(owner=request.user)
+    deal = get_object_or_404(deals, id=deal_id)
+    deal.delete()
+    return redirect('deals_list')
