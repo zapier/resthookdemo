@@ -2,9 +2,9 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
       <h2>Your Hook Subscriptions <a href="{% url "create_hook" %}" class="btn btn-default btn-sm">Create</a></h2>
-      <table class="table table-striped">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>ID</th>
@@ -29,9 +29,19 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-4">
-      <h2>Some Explanation</h2>
-      <p>We have some events for this model.</p>
+    <div class="col-md-5">
+      <h2>API Access</h2>
+      <p>In addition to creating these models via a standard Django form, we've also hooked them into <a href="http://django-tastypie.readthedocs.org/en/latest/">TastyPie</a>. The endpoints are:</p>
+      <table class="table table-condensed">
+        <tbody>
+          <tr><td style="border:0"><code>GET</code></td><td style="border:0"><code>/api/v1/hooks/</code></td><td style="border:0">list hooks</td></tr>
+          <tr><td><code>POST</code></td><td><code>/api/v1/hooks/</code></td><td>create a hook</td></tr>
+          <tr><td><code>GET</code></td><td><code>/api/v1/hooks/:id/</code></td><td>get a hook</td></tr>
+          <tr><td><code>PUT</code></td><td><code>/api/v1/hooks/:id/</code></td><td>update a hook</td></tr>
+          <tr><td><code>DELETE</code></td><td><code>/api/v1/hooks/:id/</code></td><td>delete a hook</td></tr>
+        </tbody>
+      </table>
+      <pre><code></code></pre>
     </div>
   </div>
 {% endblock content %}
