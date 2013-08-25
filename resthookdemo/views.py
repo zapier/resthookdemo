@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
+
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+
+from rest_hooks.models import Hook
 
 from resthookdemo.forms import SignupForm, LoginForm
 
@@ -32,3 +36,10 @@ def do_login(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', locals())
+
+@login_required
+def hooks(request):
+    user = request.user
+    hooks = Hook.objects.filter(user=user)
+    return render(request, 'hooks.html', locals())
+
