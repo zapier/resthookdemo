@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Signup</h2>
+      <form role="form" method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+        {{ field.label_tag }}
+        {{ field }}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <h2>Some Explanation</h2>
+      <p>Signup for a demo account. It will be yours for the next 8 hours, after which, we will delete it!</p>
+    </div>
+  </div>
+{% endblock content %}

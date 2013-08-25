@@ -23,6 +23,8 @@ urlpatterns = patterns('',
         {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
 
     url(r'^$', 'resthookdemo.views.home', name='home'),
+    url(r'^signup$', 'resthookdemo.views.signup', name='signup'),
+    url(r'^login$', 'resthookdemo.views.do_login', name='login'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^crm/', include('resthookdemo.crm.urls')),
     url(r'^api/', include(v1_api.urls)),
