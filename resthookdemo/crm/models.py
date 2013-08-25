@@ -5,13 +5,12 @@ from tastypie.models import create_api_key
 
 class Contact(models.Model):
     """
-    A root model for storing contacts, has a User owner.
+    A root model for storing contacts, has a User user.
     """
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    owner = models.ForeignKey('auth.User')
-    user = property(lambda s: s.owner)
+    user = models.ForeignKey('auth.User')
     full_name = models.CharField(max_length=255)
     email = models.EmailField()
 
@@ -26,8 +25,7 @@ class Deal(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    owner = models.ForeignKey('auth.User')
-    user = property(lambda s: s.owner)
+    user = models.ForeignKey('auth.User')
     title = models.CharField(max_length=255)
     description = models.TextField()
     value = models.DecimalField(max_digits=7, decimal_places=2)

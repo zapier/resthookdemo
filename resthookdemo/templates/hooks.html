@@ -14,12 +14,16 @@
           </tr>
         </thead>
         <tbody>
-          {% for hook in hooks%}
+          {% for hook in hooks %}
             <tr>
               <td>{{ hook.id }}</td>
               <td>{{ hook.event }}</td>
               <td>{{ hook.target }}</td>
               <td><a href="{% url "edit_hook" hook.id %}">edit</a> &amp; <a href="{% url "delete_hook" hook.id %}">delete</a></td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4"><em>No hooks!</em></td>
             </tr>
           {% endfor %}
         </tbody>

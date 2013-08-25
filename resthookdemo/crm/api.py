@@ -45,10 +45,10 @@ class ContactResource(ModelResource):
     def obj_create(self, bundle, request=None, **kwargs):
         return super(ContactResource, self).obj_create(bundle,
                                                        request,
-                                                       owner=request.user)
+                                                       user=request.user)
 
     def apply_authorization_limits(self, request, object_list):
-        return object_list.filter(owner=request.user)
+        return object_list.filter(user=request.user)
 
     class Meta:
         authentication = MultiAuthentication(SessionAuthentication(), ApiKeyAuthentication())
@@ -61,10 +61,10 @@ class DealResource(ModelResource):
     def obj_create(self, bundle, request=None, **kwargs):
         return super(DealResource, self).obj_create(bundle,
                                                     request,
-                                                    owner=request.user)
+                                                    user=request.user)
 
     def apply_authorization_limits(self, request, object_list):
-        return object_list.filter(contact__owner=request.user)
+        return object_list.filter(contact__user=request.user)
 
     class Meta:
         authentication = MultiAuthentication(SessionAuthentication(), ApiKeyAuthentication())

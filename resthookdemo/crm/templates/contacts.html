@@ -21,6 +21,10 @@
               <td>{{ contact.email }}</td>
               <td><a href="{% url "edit_contact" contact.id %}">edit</a> &amp; <a href="{% url "delete_contact" contact.id %}">delete</a></td>
             </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4"><em>No contacts!</em></td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>

@@ -23,6 +23,10 @@
               <td>{{ deal.value }}</td>
               <td><a href="{% url "edit_deal" deal.id %}">edit</a> &amp; <a href="{% url "delete_deal" deal.id %}">delete</a></td>
             </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5"><em>No deals!</em></td>
+            </tr>
           {% endfor %}
         </tbody>
       </table>
