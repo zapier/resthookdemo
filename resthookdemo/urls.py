@@ -7,7 +7,6 @@ from tastypie.api import Api
 
 from resthookdemo.crm.api import ContactResource, DealResource, HookResource
 
-
 admin.autodiscover()
 
 v1_api = Api(api_name='v1')
@@ -25,7 +24,12 @@ urlpatterns = patterns('',
     url(r'^$', 'resthookdemo.views.home', name='home'),
     url(r'^signup$', 'resthookdemo.views.signup', name='signup'),
     url(r'^login$', 'resthookdemo.views.do_login', name='login'),
+    url(r'^logout$', 'django.contrib.auth.views.logout', {'next_page': '/login'}, name='logout'),
+
     url(r'^hooks$', 'resthookdemo.views.hooks', name='hooks_list'),
+    url(r'^hooks/create$', 'resthookdemo.views.edit_hook', name='create_hook'),
+    url(r'^hooks/(?P<hook_id>\d+)/edit$', 'resthookdemo.views.edit_hook', name='edit_hook'),
+
     url(r'^admin/', include(admin.site.urls)),
     url(r'^crm/', include('resthookdemo.crm.urls')),
     url(r'^api/', include(v1_api.urls)),

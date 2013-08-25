@@ -1,5 +1,2 @@
-* Bootstrap or alternatives
-* Tastypie API
-* Simple forms
-* Plug in REST Hooks
+* Simple CRUD forms
 * Optional: Nuke username from tastypie

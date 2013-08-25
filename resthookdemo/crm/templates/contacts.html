@@ -2,8 +2,8 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-9">
-      <h2>Your Contacts</h2>
+    <div class="col-md-8">
+      <h2>Your Contacts <a href="{% url "create_contact" %}" class="btn btn-default btn-sm">Create</a></h2>
       <table class="table table-striped">
         <thead>
           <tr>
@@ -19,13 +19,14 @@
               <td>{{ contact.id }}</td>
               <td>{{ contact.full_name }}</td>
               <td>{{ contact.email }}</td>
-              <td><a href="#">edit</a> &amp; <a href="#">delete</a></td>
+              <td><a href="{% url "edit_contact" contact.id %}">edit</a> &amp; <a href="#">delete</a></td>
             </tr>
           {% endfor %}
         </tbody>
       </table>
+
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <h2>Some Explanation</h2>
       <p>We have some events for this model.</p>
     </div>

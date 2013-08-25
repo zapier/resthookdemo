@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+from rest_hooks.models import Hook
+
+
 class SignupForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -23,3 +26,8 @@ class LoginForm(forms.Form):
 
     def authenticate(self):
         return authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
+
+class HookForm(forms.ModelForm):
+    class Meta:
+        model = Hook
+        fields = ('event', 'target')

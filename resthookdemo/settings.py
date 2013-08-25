@@ -119,7 +119,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'django.contrib.admindocs',
+
     'rest_hooks',
     'resthookdemo.crm',
     'tastypie'
