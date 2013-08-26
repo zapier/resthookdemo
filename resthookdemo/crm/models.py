@@ -20,7 +20,7 @@ class Contact(models.Model):
 
 class Deal(models.Model):
     """
-    Deals, because you want to make money. Has a contact (which has a User).
+    Deals, because you want to make money. Has a User).
     """
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
