@@ -2,8 +2,6 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
-from rest_hooks.models import Hook
-
 
 class BootstrapStyle(object):
     def __init__(self, *args, **kwargs):
@@ -33,8 +31,3 @@ class LoginForm(BootstrapStyle, forms.Form):
 
     def authenticate(self):
         return authenticate(username=self.cleaned_data['username'], password=self.cleaned_data['password'])
-
-class HookForm(BootstrapStyle, forms.ModelForm):
-    class Meta:
-        model = Hook
-        fields = ('event', 'target')

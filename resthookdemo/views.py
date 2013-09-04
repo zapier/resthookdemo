@@ -1,11 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 
-from django.contrib.auth import login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
-from rest_hooks.models import Hook
-
-from resthookdemo.forms import SignupForm, LoginForm, HookForm
+from resthookdemo.forms import SignupForm, LoginForm
 
 def home(request):
     return render(request, 'base.html', locals())
@@ -36,37 +33,3 @@ def do_login(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', locals())
-
-
-@login_required
-def hooks(request):
-    user = request.user
-    hooks = Hook.objects.filter(user=user)
-    return render(request, 'hooks.html', locals())
-
-@login_required
-def edit_hook(request, hook_id=None):
-    hook = None
-    if hook_id:
-        hooks = Hook.objects.filter(user=request.user)
-        hook = get_object_or_404(hooks, id=hook_id)
-
-    if request.method == 'POST':
-        form = HookForm(request.POST, instance=hook)
-        if form.is_valid():
-            hook = form.save(commit=False)
-            hook.user = request.user
-            hook.save()
-            return redirect('hooks_list')
-    else:
-        form = HookForm(instance=hook)
-
-    return render(request, 'edit_hook.html', locals())
-
-@login_required
-def delete_hook(request, hook_id):
-    hooks = Hook.objects.filter(user=request.user)
-    hook = get_object_or_404(hooks, id=hook_id)
-    hook.delete()
-    return redirect('hooks_list')
-

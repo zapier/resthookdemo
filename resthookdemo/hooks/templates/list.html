@@ -19,7 +19,11 @@
               <td>{{ hook.id }}</td>
               <td>{{ hook.event }}</td>
               <td>{{ hook.target }}</td>
-              <td><a class="btn btn-default btn-xs" href="{% url "edit_hook" hook.id %}"><i class="icon-pencil"></i></a> <a class="btn btn-default btn-xs" href="{% url "delete_hook" hook.id %}"><i class="icon-remove"></i></a></td>
+              <td>
+                  <a class="btn btn-default btn-xs" href="{% url "edit_hook" hook.id %}"><i class="icon-pencil"></i></a>
+                  <a class="btn btn-default btn-xs" href="{% url "delete_hook" hook.id %}"><i class="icon-remove"></i></a>
+                  <a class="btn btn-default btn-xs" href="{% url "hook_history" hook.id %}">History</a>
+              </td>
             </tr>
           {% empty %}
             <tr>

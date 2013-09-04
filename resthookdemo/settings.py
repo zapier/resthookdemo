@@ -122,6 +122,7 @@ INSTALLED_APPS = (
 
     'rest_hooks',
     'resthookdemo.crm',
+    'resthookdemo.hooks',
     'tastypie'
 )
 
