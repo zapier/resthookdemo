@@ -7,9 +7,12 @@ body {
 }
 
 div.what-is {
+  padding-top: 0px;
+  margin-top: 20px;
   border-left: 6px solid #C23963;
 }
 
 div.what-is h2 {
   color: #C23963;
+  margin-top: 10px;
 }
