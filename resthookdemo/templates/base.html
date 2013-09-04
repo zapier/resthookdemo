@@ -40,6 +40,7 @@
             <li><a href="{% url "contacts_list" %}">Contacts</a></li>
             <li><a href="{% url "deals_list" %}">Deals</a></li>
             <li><a href="{% url "hooks_list" %}">Hook Subscriptions</a></li>
+            <li><a href="{% url "hook_history_all" %}">Hook History</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if request.user.is_authenticated %}

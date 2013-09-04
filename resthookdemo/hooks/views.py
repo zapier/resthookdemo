@@ -41,8 +41,11 @@ def delete_hook(request, hook_id):
     return redirect('hooks_list')
 
 @login_required
-def hook_history(request, hook_id):
+def hook_history(request, hook_id=None):
     hooks = Hook.objects.filter(user=request.user)
-    hook = get_object_or_404(hooks, id=hook_id)
-    hook_history = HookHistory.objects.filter(hook=hook).order_by('-sent_date')
+    if hook_id:
+        hook = get_object_or_404(hooks, id=hook_id)
+        hook_history = HookHistory.objects.filter(hook=hook).order_by('-sent_date')
+    else:
+        hook_history = HookHistory.objects.filter(hook__in=hooks).order_by('-sent_date')
     return render(request, 'history.html', locals())
