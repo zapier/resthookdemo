@@ -11,8 +11,8 @@ class BootstrapStyle(object):
             field.widget.attrs.update({'class': 'form-control'})
 
 class SignupForm(BootstrapStyle, forms.ModelForm):
-    username = forms.CharField()
-    password = forms.CharField(label='Password')
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     def save(self, commit=True):
        user = super(SignupForm, self).save(commit=False)
