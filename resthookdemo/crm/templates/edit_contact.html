@@ -15,9 +15,14 @@
       <button type="submit" class="btn btn-default">Submit</button>
       </form>
     </div>
-    <div class="col-md-4">
-      <h2>Some Explanation</h2>
-      <p>If you have trouble logging in, chances are the account was deleted. Please <a href="{% url "signup" %}">signup</a> again.</p>
+    <div class="col-md-4 what-is">
+      <h2>What's this</h2>
+      <p>{{ contact|yesno:"Editing,Creating" }} a contact will cause the corresponding hook to be triggered. If you haven't setup a subscription yet:</p>
+      <ol>
+        <li><a href={% url "create_hook" %}>Create a subscription</a></li>
+        <li>Come back here and {{ contact|yesno:"edit,create" }} a contact.</li>
+        <li><a href={%url "hook_history_all" %}>Watch your action get posted!</a></li>
+      </ol>
     </div>
   </div>
 {% endblock content %}

@@ -5,3 +5,11 @@ body {
 .navbar {
   margin-bottom: 30px;
 }
+
+div.what-is {
+  border-left: 6px solid #C23963;
+}
+
+div.what-is h2 {
+  color: #C23963;
+}

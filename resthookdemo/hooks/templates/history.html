@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-8">
       <h2>Hook History</h2>
       <table class="table table-hover">
         <thead>
@@ -27,8 +27,10 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-5">
-      <h2>TBD</h2>
+    <div class="col-md-4 what-is">
+      <h2>What's this</h2>
+      <p>This history of requests made by your {{ hook|yesno:"hook,hooks" }}. Each request was made as a result of an event happening (like editing a contact).</p>
+      <p>The request body column shows the raw data that was sent to the target URL of the subscription.</p>
     </div>
   </div>
 {% endblock content %}

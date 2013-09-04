@@ -3,7 +3,7 @@
 {% block content %}
   <div class="row">
     <div class="col-md-8">
-      <h2>{{ contact|yesno:"Edit,Create" }} Deal</h2>
+      <h2>{{ deal|yesno:"Edit,Create" }} Deal</h2>
       <form role="form" method="post">
       {% csrf_token %}
       {% for field in form %}
@@ -15,9 +15,14 @@
       <button type="submit" class="btn btn-default">Submit</button>
       </form>
     </div>
-    <div class="col-md-4">
-      <h2>Some Explanation</h2>
-      <p>If you have trouble logging in, chances are the account was deleted. Please <a href="{% url "signup" %}">signup</a> again.</p>
+    <div class="col-md-4 what-is">
+      <h2>What's this</h2>
+      <p>{{ deal|yesno:"Editing,Creating" }} a deal will cause the corresponding hook to be triggered. If you haven't setup a subscription yet:</p>
+      <ol>
+        <li><a href={% url "create_hook" %}>Create a subscription</a></li>
+        <li>Come back here and {{ deal|yesno:"edit,create" }} a deal.</li>
+        <li><a href={%url "hook_history_all" %}>Watch your action get posted!</a></li>
+      </ol>
     </div>
   </div>
 {% endblock content %}
