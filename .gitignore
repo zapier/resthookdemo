@@ -2,4 +2,4 @@
 *.pyc
 rest_hooks/
 *.DS_Store
-*settings_local.py
+settings_local.py
