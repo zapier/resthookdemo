@@ -10,8 +10,7 @@ from resthookdemo.hooks.models import HookHistory
 
 @login_required
 def hooks(request):
-    user = request.user
-    hooks = Hook.objects.filter(user=user)
+    hooks = Hook.objects.filter(user=request.user)
     return render(request, 'list.html', locals())
 
 @login_required

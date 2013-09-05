@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
       <h2>Your Hook Subscriptions <a href="{% url "create_hook" %}" class="btn btn-default btn-sm"><i class="icon-plus"></i> Create</a></h2>
       <table class="table table-hover">
         <thead>
@@ -33,19 +33,26 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
       <h2>API Access</h2>
       <p>In addition to creating these models via a standard Django form, we've also hooked them into <a href="http://django-tastypie.readthedocs.org/en/latest/">TastyPie</a>. The endpoints are:</p>
       <table class="table table-condensed">
         <tbody>
-          <tr><td style="border:0"><code>GET</code></td><td style="border:0"><code>/api/v1/hooks/</code></td><td style="border:0">list hooks</td></tr>
+          <tr><td style="border:0"><code>GET</code></td><td style="border:0"><code><a href="/api/v1/hooks">/api/v1/hooks/</a></code></td><td style="border:0">list hooks</td></tr>
           <tr><td><code>POST</code></td><td><code>/api/v1/hooks/</code></td><td>create a hook</td></tr>
           <tr><td><code>GET</code></td><td><code>/api/v1/hooks/:id/</code></td><td>get a hook</td></tr>
           <tr><td><code>PUT</code></td><td><code>/api/v1/hooks/:id/</code></td><td>update a hook</td></tr>
           <tr><td><code>DELETE</code></td><td><code>/api/v1/hooks/:id/</code></td><td>delete a hook</td></tr>
         </tbody>
       </table>
-      <pre><code></code></pre>
+
+      <p>To use it, try something like this (preloaded with your API key!):</p>
+      <pre><code>curl http://demo.resthooks.org/api/v1/hooks/?api_key={{ request.user.api_key.key }}
+
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"event":"contact.created","target":"http://yoursite.com/catch.php"}' \
+     http://demo.resthooks.org/api/v1/hooks/?api_key={{ request.user.api_key.key }}</code></pre>
     </div>
   </div>
 {% endblock content %}

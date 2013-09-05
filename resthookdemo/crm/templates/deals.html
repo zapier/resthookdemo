@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-6">
       <h2>Your Deals <a href="{% url "create_deal" %}" class="btn btn-default btn-sm"><i class="icon-plus"></i> Create</a></h2>
       <table class="table table-hover">
         <thead>
@@ -31,18 +31,26 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-5">
+    <div class="col-md-6">
       <h2>API Access</h2>
       <p>In addition to creating these models via a standard Django form, we've also hooked them into <a href="http://django-tastypie.readthedocs.org/en/latest/">TastyPie</a>. The endpoints are:</p>
       <table class="table table-condensed">
         <tbody>
-          <tr><td style="border:0"><code>GET</code></td><td style="border:0"><code>/api/v1/deals/</code></td><td style="border:0">list deals</td></tr>
+          <tr><td style="border:0"><code>GET</code></td><td style="border:0"><code><a href="/api/v1/deals/">/api/v1/deals/</a></code></td><td style="border:0">list deals</td></tr>
           <tr><td><code>POST</code></td><td><code>/api/v1/deals/</code></td><td>create a deal</td></tr>
           <tr><td><code>GET</code></td><td><code>/api/v1/deals/:id/</code></td><td>get a deal</td></tr>
           <tr><td><code>PUT</code></td><td><code>/api/v1/deals/:id/</code></td><td>update a deal</td></tr>
           <tr><td><code>DELETE</code></td><td><code>/api/v1/deals/:id/</code></td><td>delete a deal</td></tr>
         </tbody>
       </table>
+
+      <p>To use it, try something like this (preloaded with your API key!):</p>
+      <pre><code>curl http://demo.resthooks.org/api/v1/deals/?api_key={{ request.user.api_key.key }}
+
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -d '{"title":"New Deal","description":"Its great!","value":100}' \
+     http://demo.resthooks.org/api/v1/deals/?api_key={{ request.user.api_key.key }}</code></pre>
     </div>
   </div>
 {% endblock content %}
