@@ -1,6 +1,6 @@
 Django==1.5.2
 django-tastypie==0.10.0
-django-rest-hooks
+django-rest-hooks==1.0.4
 python-mimeparse
 gunicorn==0.16.1
 dj-database-url
