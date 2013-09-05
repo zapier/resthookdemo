@@ -2,7 +2,7 @@ Django==1.5.2
 django-tastypie==0.10.0
 django-rest-hooks==1.0.4
 python-mimeparse
-gunicorn==0.16.1
+gunicorn==18.0
 dj-database-url
 dj-static
 psycopg2

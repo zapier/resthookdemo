@@ -1,1 +1,1 @@
-web: python manage.py collectstatic --noinput; python manage.py run_gunicorn --workers=2 --bind=0.0.0.0:$PORT
+web: python manage.py collectstatic --noinput; gunicorn resthookdemo.wsgi:application --workers=2 --bind=0.0.0.0:$PORT
