@@ -19,6 +19,7 @@ class PrettyJSONSerializer(Serializer):
         return simplejson.dumps(data, cls=json.DjangoJSONEncoder,
                 sort_keys=True, ensure_ascii=False, indent=self.json_indent)
 
+
 class UserObjectsOnlyAuthorization(Authorization):
     def read_list(self, object_list, bundle):
         return object_list.filter(user=bundle.request.user)
@@ -55,7 +56,6 @@ class ApiKeyAuthentication(Authentication):
         from tastypie.models import ApiKey
 
         api_key_raw = request.GET.get('api_key', None)
-        print api_key_raw
 
         try:
             api_key = ApiKey.objects.select_related(AUTH_USER_MODEL).get(key=api_key_raw)
