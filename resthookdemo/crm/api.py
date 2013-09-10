@@ -66,11 +66,11 @@ class ApiKeyAuthentication(Authentication):
 
         return True
 
+
 class ContactResource(ModelResource):
-    def obj_create(self, bundle, request=None, **kwargs):
+    def obj_create(self, bundle, **kwargs):
         return super(ContactResource, self).obj_create(bundle,
-                                                       request,
-                                                       user=request.user)
+                                                       user=bundle.request.user)
 
     def apply_authorization_limits(self, request, object_list):
         return object_list.filter(user=request.user)
@@ -81,12 +81,13 @@ class ContactResource(ModelResource):
         serializer = PrettyJSONSerializer()
         queryset = Contact.objects.all()
         resource_name = 'contacts'
+        default_format = 'application/json'
+
 
 class DealResource(ModelResource):
-    def obj_create(self, bundle, request=None, **kwargs):
+    def obj_create(self, bundle, **kwargs):
         return super(DealResource, self).obj_create(bundle,
-                                                    request,
-                                                    user=request.user)
+                                                    user=bundle.request.user)
 
     def apply_authorization_limits(self, request, object_list):
         return object_list.filter(contact__user=request.user)
@@ -97,4 +98,4 @@ class DealResource(ModelResource):
         serializer = PrettyJSONSerializer()
         queryset = Deal.objects.all()
         resource_name = 'deals'
-
+        default_format = 'application/json'

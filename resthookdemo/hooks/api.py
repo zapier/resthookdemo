@@ -7,10 +7,9 @@ from rest_hooks.models import Hook
 
 
 class HookResource(ModelResource):
-    def obj_create(self, bundle, request=None, **kwargs):
+    def obj_create(self, bundle, **kwargs):
         return super(HookResource, self).obj_create(bundle,
-                                                    request,
-                                                    user=request.user)
+                                                    user=bundle.request.user)
 
     def apply_authorization_limits(self, request, object_list):
         return object_list.filter(user=request.user)
@@ -23,3 +22,4 @@ class HookResource(ModelResource):
         authorization = UserObjectsOnlyAuthorization()
         allowed_methods = ['get', 'post', 'delete']
         fields = ['event', 'target']
+        default_format = 'application/json'
