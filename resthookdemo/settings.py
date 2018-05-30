@@ -169,6 +169,8 @@ LOGGING = {
     }
 }
 
+HOOK_DELIVERER = 'resthookdemo.hooks.deliverer.deliver'
+
 ####################
 #### OVERWRITES ####
 ####################
